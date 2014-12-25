@@ -12,11 +12,16 @@ License:        GPLv2+
 Url:            http://leechcraft.org
 Source0:        http://dist.leechcraft.org/LeechCraft/0.6.70/leechcraft-0.6.70.tar.xz 
 
-BuildRequires:  cmake
-BuildRequires:  boost-devel 
-BuildRequires:  qt4-devel
-BuildRequires:  rb_libtorrent-devel
-BuildRequires:  leechcraft-devel >= %{version}
+
+BuildRequires: cmake
+BuildRequires: boost-devel
+BuildRequires: qt4-devel
+BuildRequires: qt-webkit-devel
+BuildRequires: bzip2-devel
+BuildRequires: qwt-devel
+BuildRequires: pcre-devel
+BuildRequires: rb_libtorrent-devel
+BuildRequires: leechcraft-devel >= %{version}
 
 
 %description
