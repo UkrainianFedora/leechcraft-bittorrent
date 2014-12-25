@@ -43,14 +43,14 @@ pushd %{_target_platform}
     ../src
 
 cd plugins/bittorrent
-make %{?_smp_mflags} -C %{_target_platform} 
+make %{?_smp_mflags} 
 popd
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd plugins/bittorrent/
-make install/fast DESTDIR=$RPM_BUILD_ROOT -C %{_target_platform}
+cd %{_target_platform}/plugins/bittorrent/
+make install/fast DESTDIR=$RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
