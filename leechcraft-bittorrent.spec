@@ -42,9 +42,10 @@ pushd %{_target_platform}
     $(cat ../src/CMakeLists.txt | grep cmake_dependent_option | grep ENABLE | awk '{print $2}' | sed 's/(//g;s/.*/-D\0=False/g' | xargs) \
     ../src
 
-popd
 cd plugins/bittorrent
 make %{?_smp_mflags} -C %{_target_platform} 
+popd
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
