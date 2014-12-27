@@ -11,6 +11,7 @@ Release:        1%{?dist}
 License:        GPLv2+
 Url:            http://leechcraft.org
 Source0:        http://dist.leechcraft.org/LeechCraft/0.6.70/leechcraft-0.6.70.tar.xz 
+Patch0:         001-patch-rb-libtorrent-compilation-error.patch 
 
 
 BuildRequires: cmake
@@ -30,6 +31,7 @@ BitTorrent Client for LeechCraft.
 
 %prep
 %setup -qn %{product_name}-%{version}
+%patch0 -p 1
 
 
 %build
@@ -38,8 +40,7 @@ pushd %{_target_platform}
 %{cmake} \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DLEECHCRAFT_VERSION="%{version}" \
-    $(cat ../src/CMakeLists.txt | egrep "^option \(ENABLE" | awk '{print $2}' | sed 's/(//g;s/.*/-D\0=False/g;s/TORRENT=False/TORRENT=True/g' | xargs) \
-    $(cat ../src/CMakeLists.txt | grep cmake_dependent_option | grep ENABLE | awk '{print $2}' | sed 's/(//g;s/.*/-D\0=False/g' | xargs) \
+    $(cat ../src/CMakeLists.txt | egrep "^(cmake_dependent_)?option \(ENABLE" | awk '{print $2}' | sed 's/^(/-D/;s/$/=False/;s/TORRENT=False/TORRENT=True/' | xargs) \
     ../src
 
 cd plugins/bittorrent
@@ -58,6 +59,6 @@ make install/fast DESTDIR=$RPM_BUILD_ROOT
 %files
 
 %changelog
-* Thu Dec 26 2014 Minh Ngo <minh@fedoraproject.org> - 0.6.70-1
-- 0.6.70
+* Fri Dec 26 2014 Minh Ngo <minh@fedoraproject.org> - 0.6.70-1
+- 0.6.70-1
 
