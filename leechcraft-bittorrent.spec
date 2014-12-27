@@ -47,16 +47,21 @@ cd plugins/bittorrent
 make %{?_smp_mflags} 
 popd
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
-cd %{_target_platform}/plugins/bittorrent/
+pushd %{_target_platform}/plugins/bittorrent/
 make install/fast DESTDIR=$RPM_BUILD_ROOT
+popd
+%find_lang leechcraft_bittorrent  --with-qt --without-mo
+
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files
+%files -f leechcraft_bittorrent.lang 
+%{plugin_dir}/libleechcraft_bittorrent.so 
+%{settings_dir}/*.xml
+%{_datadir}/applications/leechcraft-bittorrent.desktop 
 
 %changelog
 * Fri Dec 26 2014 Minh Ngo <minh@fedoraproject.org> - 0.6.70-1
