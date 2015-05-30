@@ -73,7 +73,7 @@ popd
 %{_datadir}/applications/leechcraft-bittorrent-qt5.desktop
 
 %changelog
-* Sat Dec 30 2015 Minh Ngo <minh@fedoraproject.org> - 0.6.75-1
+* Sat May 30 2015 Minh Ngo <minh@fedoraproject.org> - 0.6.75-1
 - 0.6.75-1, Qt5
 
 * Fri Dec 26 2014 Minh Ngo <minh@fedoraproject.org> - 0.6.70-1
